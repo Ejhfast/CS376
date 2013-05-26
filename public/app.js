@@ -14,7 +14,7 @@ $(document).ready(function(){
         if(selected[0] === "A0"){
           if(window.last_enter !== null){
             console.log(window.last_enter.results);
-            $('#text').children().last().html("<span class='word'>"+window.last_enter.results[window.last_enter.index+1][0]+"</span>");
+            $('#text').children().last().html(window.last_enter.results[window.last_enter.index+1][0]);
             window.last_enter = {query:window.last_enter.query, results:window.last_enter.results, index:window.last_enter.index+1}; 
           }
           else{
