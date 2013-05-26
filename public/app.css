@@ -1,14 +1,50 @@
 body{
   font-family:helvetica;
   font-size:16px;
-  color:#555;
+  color:#333;
 }
 #content{
   width:600px;
-  margin:0px auto;
+  margin:100px auto;
+}
+.clear{
+  clear:both;
+}
+#key{
+  width:200px;
+  margin:20px auto;
+}
+#key .sec{
+  float:left;
+  width:40px;
+  margin:0px 5px;
+}
+#key .sec .l{
+  text-align:center;
+  margin:4px 0px;
+  padding:4px;
+  font-weight:800;
+  color:#333;
+}
+#key .sec.A1{
+  background-color:#c9e38c;
+}
+#key .sec.A2{
+  background-color:#ed9492;
+}
+#key .sec.A4{
+  background-color:#ebed91;
+}
+#key .sec.A5{
+  background-color:#e089b7;
 }
 span.word{
   margin:0px 5px 0px 0px;
+}
+#text{
+  margin:40px 0px;
+  font-size:1.5em;
+  font-weight:200;
 }
 #letters{
   margin:20px 0px;
@@ -18,6 +54,35 @@ span.word{
   margin:0px 10px 0px 0px;
   font-size:24px;
   font-weight:200;
-  background-color:#efefef;
-  padding:3px;
+  padding:8px;
+}
+#letters .letter.A1{
+  background-color:#c9e38c;
+}
+#letters .letter.A2{
+  background-color:#ed9492;
+}
+#letters .letter.A4{
+  background-color:#ebed91;
+}
+#letters .letter.A5{
+  background-color:#e089b7;
+}
+#word_list{
+  position:absolute;
+  width:200px;
+  right:20px;
+  top:100px;
+  font-weight:200;
+}
+#word_list .word{
+  position:relative;
+  margin:3px 0px;
+}
+#word_list .word #idx{
+  position:absolute;
+  display:inline;
+  font-weight:800;
+  left:-20px;
+  top:0px;
 }

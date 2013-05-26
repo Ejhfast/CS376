@@ -1,4 +1,13 @@
 $(document).ready(function(){
+  function getResults(arr){
+    var query = _.map(arr, function(x){
+      if(x === "A1") return "1";
+      else if(x === "A2") return "2";
+      else if(x === "A4") return "3";
+      else if(x === "A5") return "4";
+    }).join("");
+    return _.sortBy(Dictionary[query], function(x){return -1*x[1]});
+  };
   window.stack = [];
   setInterval(function(){
     $.get("/finger_data", function(resp){
@@ -14,8 +23,22 @@ $(document).ready(function(){
         if(selected[0] === "A0"){
           if(window.last_enter !== null){
             console.log(window.last_enter.results);
-            $('#text').children().last().html(window.last_enter.results[window.last_enter.index+1][0]);
-            window.last_enter = {query:window.last_enter.query, results:window.last_enter.results, index:window.last_enter.index+1}; 
+            var index = window.last_enter.index,
+                results = window.last_enter.results;
+            $('#text').children().last().html(results[index][0]);
+            $('#word_list').html("");
+            $('#letters').html("");
+            _.each(_.first(results,10), function(x,i){
+              var extra = "";
+              if(i === index){
+                extra = "<div id='idx'>></div>";
+              }
+              $('#word_list').append("<div class='word'>"+x[0]+extra+"</div>");
+            });
+            if(index+1 >= 10 || index+1 >= results.length){
+              index = -1;
+            }
+            window.last_enter = {query:window.last_enter.query, results:results, index:index+1}; 
           }
           else{
             var query = _.map(window.stack, function(x){
@@ -25,13 +48,19 @@ $(document).ready(function(){
               else if(x === "A5") return "4";
             }).join("");
             var results = _.sortBy(Dictionary[query], function(x){return -1*x[1]});
-            console.log(results);
             window.stack = [];
             window.current_selection = null;
             $('#text').append("<span class='word'>"+results[0][0]+"</span>");
             $('#letters').html("");
-            var index = 0;
-            window.last_enter = {query:query, results:results, index:0}; 
+            $('#word_list').html("");
+            _.each(_.first(results,10), function(x,i){
+              var extra = "";
+              if(i === 0){
+                extra = "<div id='idx'>></div>";
+              }
+              $('#word_list').append("<div class='word'>"+x[0]+extra+"</div>");
+            });
+            window.last_enter = {query:query, results:results, index:1}; 
           }
         }
         else if(selected[0] === window.current_selection){
@@ -39,7 +68,23 @@ $(document).ready(function(){
         }
         else{
           window.stack.push(selected[0]);
-          $('#letters').append("<div class='letter'>"+selected[0]+"</div>");
+          var query = _.map(window.stack, function(x){
+            if(x === "A1") return "1";
+            else if(x === "A2") return "2";
+            else if(x === "A4") return "3";
+            else if(x === "A5") return "4";
+          }).join("");
+          var results = _.sortBy(Dictionary[query], function(x){return -1*x[1]});
+          $('#word_list').html("");
+          _.each(_.first(results,10), function(x,i){
+            var extra = "";
+            if(i === 0){
+              extra = "<div id='idx'>></div>";
+            }
+            $('#word_list').append("<div class='word'>"+x[0]+extra+"</div>");
+          });
+          $('#letters').append("<div class='letter "+selected[0]+"'>"+selected[0]+"</div>");
+          $(".sec."+selected[0]).fadeIn(100).fadeOut(100).fadeIn(100);
           console.log(selected[0]);
           window.current_selection = selected[0];
           window.last_enter = null;
