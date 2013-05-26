@@ -86,3 +86,15 @@ span.word{
   left:-20px;
   top:0px;
 }
+#add_word{
+  margin:20px 0px;
+}
+#add_word input[type="text"]{
+  padding:5px;
+  border:1px solid #eee;
+  font-size:16px;
+}
+#add_word button{
+  padding:5px;
+  font-size:16px;
+}
